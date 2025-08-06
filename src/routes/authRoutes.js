@@ -40,13 +40,13 @@ router.post('/register', [
         await user.save();
 
         // [Later] TODO: Send confirmation email via notification service
-        sendEmailNotification({
-            to: user.email,
-            subject: 'Welcome to our App!',
-            text: `Hi ${user.username}, thanks for registering!`,
-        }).catch(err => {
-            console.error('Failed to send registration email: ', err.message)
-        })
+        // sendEmailNotification({
+        //     to: user.email,
+        //     subject: 'Welcome to our App!',
+        //     text: `Hi ${user.username}, thanks for registering!`,
+        // }).catch(err => {
+        //     console.error('Failed to send registration email: ', err.message)
+        // })
 
         res.status(201).json({ message: 'User registered successfully' });
     } catch (error) {
@@ -114,11 +114,11 @@ router.post('/request-password-reset', [
 
         await user.save()
 
-        await sendEmailNotification({
-            to: user.email,
-            subject: 'Password Reset Request',
-            text: `You requested a password reset, here's the token: ${token}`
-        })
+        // await sendEmailNotification({
+        //     to: user.email,
+        //     subject: 'Password Reset Request',
+        //     text: `You requested a password reset, here's the token: ${token}`
+        // })
 
         res.json({ message: 'If an account exists, a reset email has been sent.' });
     } catch (error) {
@@ -155,12 +155,11 @@ router.post('/reset-password', [
 
         await user.save();
 
-        // Optionally send confirmation email
-        await sendEmailNotification({
-            to: user.email,
-            subject: 'Password Reset Successful',
-            text: 'Your password has been reset successfully.',
-        });
+        // await sendEmailNotification({
+        //     to: user.email,
+        //     subject: 'Password Reset Successful',
+        //     text: 'Your password has been reset successfully.',
+        // });
 
         res.json({ message: 'Password reset successful' });
     } catch (error) {
